@@ -71,16 +71,9 @@ app.put('/api/items/:id', async (req, res) => {
     let itemtitle = req.params.title;
     var documentToEdit = itemsRef.doc(id);
     try {
-        var doc = await documentToEdit.get();
-        if(!doc.exists) {
-            res.status(404).send("Sorry, that item doesn't exist");
-            return;
-        }
-        else {
-            documentToEdit.update({
-                title: itemtitle
-            });
-        }
+        documentToEdit.update({
+            title: itemtitle
+        });
     }
     catch(err) {
         res.status(500).send("Error editing document", err);
